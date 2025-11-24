@@ -1,0 +1,11 @@
+[package]
+name = "basic"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+luminos-config = { path = "../../" }  # relative path to your main crate
+dotenv = "0.15"
+
+[build-dependencies]
+luminos-config = { path = "../../" }  # needed to access generate() in build.rs
