@@ -1,5 +1,5 @@
+use luminos_config::{dotenv, generate};
 use std::path::Path;
-use luminos_config::{generate, dotenv};
 
 fn main() {
     dotenv().ok();

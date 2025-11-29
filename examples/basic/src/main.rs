@@ -8,7 +8,6 @@ fn main() {
         println!("App name: {}", name);
     }
 
-
     if let Some(Node::Text(env)) = cfg.get("app.env") {
         println!("App env: {}", env);
     }
@@ -21,13 +20,18 @@ fn main() {
         println!("Database connection: {}", default_connection);
 
         // let driver_path = format!("database.connections.{}.driver", default_connection);
-        if let Some(Node::Text(driver)) = cfg.get(&format!("database.connections.{}.driver", default_connection)) {
+        if let Some(Node::Text(driver)) = cfg.get(&format!(
+            "database.connections.{}.driver",
+            default_connection
+        )) {
             println!("Database driver: {}", driver);
 
             if driver == "mysql" {
-                if let Some(Node::Text(port)) = cfg.get(&format!("database.connections.{}.port", default_connection)) {
+                if let Some(Node::Text(port)) =
+                    cfg.get(&format!("database.connections.{}.port", default_connection))
+                {
                     println!("Database Port: {}", port);
-                } 
+                }
             }
         }
     }

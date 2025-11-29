@@ -39,7 +39,10 @@ pub fn generate(config_dir: &Path, out_path: &Path) -> std::io::Result<()> {
             match path.file_stem().and_then(|s| s.to_str()) {
                 Some("mod") | None => {} // skip mod.rs or non-rust files
                 Some(name) => {
-                    mod_rs.push_str(&format!("    cfg.insert_section(\"{0}\", &{0}::config());\n", name));
+                    mod_rs.push_str(&format!(
+                        "    cfg.insert_section(\"{0}\", &{0}::config());\n",
+                        name
+                    ));
                 }
             }
         }

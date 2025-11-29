@@ -1,13 +1,12 @@
 use std::collections::HashMap;
+mod codegen;
 mod env;
 mod node;
-mod codegen;
 
-pub use env::env;
-pub use node::Node;
 pub use crate::codegen::generate;
 pub use dotenv::dotenv;
-
+pub use env::env;
+pub use node::Node;
 
 #[derive(Debug, Clone, Default)]
 pub struct Config {
@@ -45,15 +44,14 @@ impl Config {
         Some(cur)
     }
 
-    /// Set a config value by key 
+    /// Set a config value by key
     pub fn set(&mut self, path: &str, value: Node) {
         let mut cur = &mut self.root;
         for key in path.split('.') {
             cur = match cur {
-                Node::Object(map) => {
-                    map.entry(key.to_string())
-                        .or_insert(Node::Object(HashMap::new()))
-                }
+                Node::Object(map) => map
+                    .entry(key.to_string())
+                    .or_insert(Node::Object(HashMap::new())),
                 _ => panic!("Cannot set into non-object"),
             };
         }
